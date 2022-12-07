@@ -25,7 +25,7 @@ body{
     height: 50px;
     background-image: url('img/dice6.png');
 }
-.playerturn{
+.playerTurn{
     display: inline-block;
     background-color: antiquewhite;
     width: 50px;
@@ -35,7 +35,7 @@ body{
     width: 600px;
     height: 600px;
 }
-.boardoverlay{
+.boardOverlay{
     top: 0px;
     position: absolute;
     background-image: url('img/snakes.png');
@@ -48,6 +48,7 @@ body{
     background-size: contain;
     width: 20px;
     height: 20px;
+    display: none;
 }
 .pawn0{
     background-image: url('img/pawn0.png');

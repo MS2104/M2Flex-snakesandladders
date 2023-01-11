@@ -1,4 +1,7 @@
 let game;
+function createPlayers(amountOfPlayers) {
+    game.start(amountOfPlayers);
+}
 function init()
 {
     game = new Game();
@@ -10,6 +13,7 @@ class Player
     {
         this.index = index;
         this.atTile = 0;
+        console.log(this.atTile);
         this.pawn = document.getElementsByClassName("pawn" + index)[0];
         this.pawn.style.display = "block";
     }
@@ -120,13 +124,14 @@ class Game
         player.pawn.style.top = tile.div.style.top;
     }
 
-    roll()
+    roll() 
     {
         let roll = Math.floor(Math.random() * 6) + 1;
         console.log(roll)
-        this.rollDiv.style.backgroundImage = "url(dice" + roll + ".png)";
+        this.rollDiv.style.backgroundImage = "url(img/dice" + roll + ".png)";
         let player = this.players[this.playerTurn];
         let atTile = player.atTile;
+        console.log(player);
         atTile = (atTile + roll) % this.tiles.length;
         if (atTile >= this.tiles.length-1) {
             this.winnerDiv.textContent = "Player " + (this.playerTurn + 1) + " wins!";

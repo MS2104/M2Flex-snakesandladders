@@ -37,7 +37,7 @@ class Game
         this.mainDiv = document.getElementsByClassName("main")[0];
         this.boardDiv = document.getElementsByClassName("board")[0];
         this.boardoverlayDiv = document.getElementsByClassName("selectPlayers")[0];
-
+        alert('This code is from JerukPurut(Eugene)')
         this.tiles = [];
         this.players = [];
         console.log(this.tiles)
@@ -46,6 +46,7 @@ class Game
         console.log(this.playerTurn)
         this.setupBoard();
     }
+
     setupBoard()
     {   
         let path = [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -55,15 +56,12 @@ class Game
         for (var i = 0; i < path.length; i++)
         {
             let cmd = path[i];
-            //right movement map
             if(cmd == 1){
                 x++;
             }
-            // left movement map
             else if (cmd == 3){
                 x--;
             }
-            // up movement map 
             else if (cmd == 0){
                 y--;
             }
@@ -76,7 +74,7 @@ class Game
     }
 
     setupGotos()
-    {   //let op! deze tegelnummers beginnen 1
+    {   
         let goto = [[6, 14], [16, 4], [17, 23], [27, 33], [29, 10], [38, 43], [39, 20], [45, 34]];
         for (var i = 0; i < goto.length; i++)
         {
@@ -87,6 +85,7 @@ class Game
             tile.goto = end;
         }
     }
+
     start(amountOfPlayers)
     {   
         this.selectplayersDiv.style.display = "none";
@@ -130,14 +129,23 @@ class Game
         console.log(roll)
         this.rollDiv.style.backgroundImage = "url(img/dice" + roll + ".png)";
         let player = this.players[this.playerTurn];
-        let atTile = player.atTile;
+        let atTile = player.atTile+roll;
         console.log(player);
-        atTile = (atTile + roll) % this.tiles.length;
-        if (atTile >= this.tiles.length-1) {
+        if (atTile == this.tiles.length-1) {
             this.winnerDiv.textContent = "Player " + (this.playerTurn + 1) + " wins!";
             this.winnerDiv.style.display = "block";
+            this.setPawn(this.playerTurn, atTile);
         } 
-        else {
+        else
+        { 
+            if(atTile> this.tiles.length-1){
+                let divToEnd = (atTile ) % (this.tiles.length-1);
+                console.log(divToEnd)
+                atTile=this.tiles.length-1;
+                atTile -= divToEnd ;
+                    
+            }
+            
             let tile = this.tiles[atTile];
             if (tile.goto !== -1) {
                 atTile = tile.goto;
@@ -145,15 +153,16 @@ class Game
             this.setPawn(this.playerTurn, atTile);
             this.draw();
             this.moveToNextPlayer();
+            
         }
     }
+    
     makeBoardDiv(x,y,tileDisplayNumber)
     {
         let div = document.createElement("div");
         div.className = "tile";
         div.style.left = x + "px";
         div.style.top = y + "px";
-        //Jerukpurut404//
         div.textContent = tileDisplayNumber;      
         this.boardDiv.appendChild(div);
 

@@ -37,7 +37,6 @@ class Game
         this.mainDiv = document.getElementsByClassName("main")[0];
         this.boardDiv = document.getElementsByClassName("board")[0];
         this.boardoverlayDiv = document.getElementsByClassName("selectPlayers")[0];
-        alert('This code is from JerukPurut(Eugene)')
         this.tiles = [];
         this.players = [];
         console.log(this.tiles)
